@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DengoVet – Veterinária a Domicílio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink-light: #fde8e4;
+      --pink-mid:   #f7c5bb;
+      --pink-main:  #f4a093;
+      --pink-dark:  #e8746a;
+      --salmon:     #e05c52;
+      --white:      #ffffff;
+      --text-dark:  #2b1a18;
+      --text-mid:   #6b3d38;
+      --text-soft:  #9e6b66;
+      --green-wa:   #25D366;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ───────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 6vw;
+      box-shadow: 0 2px 12px rgba(228,116,106,.12);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo-icon {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--pink-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: var(--salmon);
+      line-height: 1;
+    }
+    .nav-brand span { font-size: .75rem; display: block; color: var(--text-soft); font-family: 'DM Sans', sans-serif; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+    .nav-cta {
+      background: var(--salmon); color: var(--white);
+      border: none; border-radius: 30px;
+      padding: 10px 24px; font-size: .9rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--pink-dark); transform: translateY(-1px); }
+
+    /* ── HERO ──────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--pink-light) 0%, #fef3f0 60%, var(--white) 100%);
+      padding: 80px 6vw 60px;
+      display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px;
+      min-height: 88vh;
+    }
+    .hero-text { max-width: 520px; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--pink-mid); color: var(--salmon);
+      border-radius: 20px; padding: 6px 16px;
+      font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      line-height: 1.12;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+    }
+    .hero-title em { color: var(--salmon); font-style: italic; }
+    .hero-sub {
+      font-size: 1.05rem; color: var(--text-mid);
+      line-height: 1.7; margin-bottom: 36px;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--salmon); color: var(--white);
+      border-radius: 32px; padding: 14px 32px;
+      font-size: 1rem; font-weight: 600; text-decoration: none;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 6px 24px rgba(224,92,82,.28);
+    }
+    .btn-primary:hover { background: var(--pink-dark); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(224,92,82,.36); }
+    .hero-img {
+      border-radius: 32px;
+      overflow: hidden;
+      background: var(--pink-mid);
+      aspect-ratio: 4/5;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 20px 60px rgba(224,92,82,.18);
+      position: relative;
+    }
+    .hero-img-placeholder {
+      font-size: 6rem; opacity: .6;
+    }
+    .hero-float {
+      position: absolute; bottom: 24px; left: 24px;
+      background: var(--white); border-radius: 16px;
+      padding: 12px 18px;
+      display: flex; align-items: center; gap: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    }
+    .hero-float-icon { font-size: 1.4rem; }
+    .hero-float-text { font-size: .78rem; color: var(--text-mid); font-weight: 500; line-height: 1.3; }
+    .hero-float-text strong { display: block; color: var(--text-dark); font-size: .9rem; }
+
+    /* ── SECTION BASE ──────────────────────────────── */
+    section { padding: 80px 6vw; }
+    .section-tag {
+      font-size: .75rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--salmon);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      line-height: 1.2; margin-bottom: 18px;
+    }
+    .section-body {
+      font-size: 1rem; color: var(--text-mid); line-height: 1.75;
+      max-width: 560px;
+    }
+
+    /* ── SOBRE ─────────────────────────────────────── */
+    .sobre {
+      background: var(--white);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .sobre-visual {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    .sobre-card {
+      background: var(--pink-light); border-radius: 20px;
+      padding: 24px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .sobre-card:first-child { grid-column: span 2; background: var(--pink-mid); }
+    .sobre-card-icon { font-size: 1.6rem; }
+    .sobre-card-text { font-size: .85rem; color: var(--text-mid); line-height: 1.5; font-weight: 500; }
+
+    /* ── SERVIÇOS ──────────────────────────────────── */
+    .servicos { background: linear-gradient(180deg, #fff8f7 0%, var(--white) 100%); }
+    .servicos-header { text-align: center; margin-bottom: 50px; }
+    .servicos-header .section-body { margin: 0 auto; }
+    .servicos-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .servico-card {
+      background: var(--white);
+      border: 1.5px solid var(--pink-mid);
+      border-radius: 24px; padding: 30px 24px;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      cursor: default;
+    }
+    .servico-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(228,116,106,.14);
+      border-color: var(--salmon);
+    }
+    .servico-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: var(--pink-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 16px;
+    }
+    .servico-title {
+      font-weight: 700; font-size: 1rem; color: var(--salmon);
+      margin-bottom: 8px;
+    }
+    .servico-desc { font-size: .85rem; color: var(--text-mid); line-height: 1.6; }
+
+    /* ── VET ───────────────────────────────────────── */
+    .vet {
+      background: var(--pink-light);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      border-radius: 40px; margin: 0 4vw;
+      padding: 70px 6vw;
+    }
+    .vet-photo {
+      border-radius: 28px; overflow: hidden;
+      background: var(--pink-mid); aspect-ratio: 3/4;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      box-shadow: 0 16px 48px rgba(224,92,82,.2);
+    }
+    .vet-crmv {
+      display: inline-block;
+      background: var(--salmon); color: var(--white);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: .78rem; font-weight: 700; letter-spacing: .05em;
+      margin-bottom: 16px;
+    }
+    .vet-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      color: var(--salmon); margin-bottom: 6px;
+    }
+    .vet-role { font-size: .9rem; color: var(--text-soft); margin-bottom: 24px; font-weight: 500; }
+    .vet-bio p { font-size: .95rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 14px; }
+
+    /* ── ATENDIMENTO ───────────────────────────────── */
+    .atendimento {
+      background: var(--white);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .cidades-list { list-style: none; margin: 20px 0 32px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .cidades-list li {
+      background: var(--pink-light); color: var(--salmon);
+      border-radius: 20px; padding: 7px 18px;
+      font-size: .88rem; font-weight: 600;
+    }
+    .map-box {
+      background: var(--pink-light); border-radius: 28px;
+      aspect-ratio: 4/3; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+      font-size: 3.5rem;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,.05);
+      overflow: hidden; position: relative;
+    }
+    .map-label {
+      font-size: .85rem; color: var(--text-soft); font-weight: 500;
+    }
+
+    /* ── CONTATO ───────────────────────────────────── */
+    .contato { background: linear-gradient(135deg, var(--salmon) 0%, var(--pink-dark) 100%); }
+    .contato .section-tag { color: rgba(255,255,255,.7); }
+    .contato .section-title { color: var(--white); }
+    .contato .section-body { color: rgba(255,255,255,.82); }
+    .contato-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+      margin-top: 40px;
+    }
+    .contact-card {
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 20px; padding: 22px 24px;
+      display: flex; align-items: center; gap: 16px;
+      text-decoration: none; color: var(--white);
+      transition: background .2s, transform .15s;
+      margin-bottom: 14px;
+    }
+    .contact-card:hover { background: rgba(255,255,255,.25); transform: translateX(4px); }
+    .contact-card-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .contact-card-info { line-height: 1.3; }
+    .contact-card-label { font-size: .75rem; opacity: .75; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; }
+    .contact-card-value { font-size: 1rem; font-weight: 600; }
+    .horario-box {
+      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.2);
+      border-radius: 20px; padding: 28px;
+    }
+    .horario-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+    .horario-row {
+      display: flex; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.12);
+      font-size: .9rem; color: rgba(255,255,255,.85);
+    }
+    .horario-row:last-child { border-bottom: none; }
+    .horario-row span:last-child { color: var(--white); font-weight: 600; }
+
+    /* ── FOOTER ────────────────────────────────────── */
+    footer {
+      background: var(--text-dark); color: rgba(255,255,255,.6);
+      text-align: center; padding: 28px 6vw;
+      font-size: .82rem; line-height: 1.7;
+    }
+    footer strong { color: var(--pink-main); }
+
+    /* ── WHATSAPP FAB ──────────────────────────────── */
+    .wa-fab {
+      position: fixed; bottom: 28px; right: 28px; z-index: 200;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: var(--green-wa);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; text-decoration: none;
+      box-shadow: 0 8px 24px rgba(37,211,102,.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .wa-fab:hover { transform: scale(1.1); box-shadow: 0 12px 32px rgba(37,211,102,.5); }
+
+    /* ── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 780px) {
+      .hero, .sobre, .atendimento, .contato-grid { grid-template-columns: 1fr; }
+      .hero { min-height: auto; padding-top: 50px; }
+      .hero-img { max-height: 320px; }
+      .vet { grid-template-columns: 1fr; margin: 0 2vw; padding: 50px 5vw; }
+      .sobre-visual { grid-template-columns: 1fr; }
+      .sobre-card:first-child { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">🐾</div>
+    <div class="nav-brand">
+      Dengo<em>Vet</em>
+      <span>Veterinária a Domicílio</span>
+    </div>
+  </div>
+  <a class="nav-cta" href="https://wa.me/5548988789673" target="_blank">Agendar consulta</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">🐶 Veterinária a Domicílio</div>
+    <h1 class="hero-title">Cuidado e <em>dengo</em> no conforto da sua casa!</h1>
+    <p class="hero-sub">Atendimento veterinário de excelência para cães e gatos diretamente onde eles se sentem mais seguros e felizes — a casa deles.</p>
+    <a class="btn-primary" href="https://wa.me/5548988789673" target="_blank">
+      💬 Agendar consulta
+    </a>
+  </div>
+  <div class="hero-img">
+    <div class="hero-img-placeholder">🐾</div>
+    <div class="hero-float">
+      <div class="hero-float-icon">✅</div>
+      <div class="hero-float-text">
+        <strong>Sem estresse</strong>
+        Consulta em casa, sem fila de espera
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre">
+  <div>
+    <div class="section-tag">Sobre a DengoVet</div>
+    <h2 class="section-title">Nascemos para cuidar com amor</h2>
+    <p class="section-body">
+      A DengoVet nasceu para levar atendimento veterinário de excelência para cães e gatos diretamente onde eles se sentem mais seguros e felizes — a casa deles.<br><br>
+      Nosso objetivo é proporcionar uma experiência mais calma para o animal, evitando o estresse de deslocamentos e salas de espera, além de permitir uma avaliação mais próxima da rotina e do ambiente do pet.
+    </p>
+  </div>
+  <div class="sobre-visual">
+    <div class="sobre-card">
+      <div class="sobre-card-icon">🏠</div>
+      <div class="sobre-card-text">Atendimento no conforto do lar do seu pet, sem deslocamentos estressantes</div>
+    </div>
+    <div class="sobre-card">
+      <div class="sobre-card-icon">🩺</div>
+      <div class="sobre-card-text">Avaliação clínica cuidadosa e dedicada</div>
+    </div>
+    <div class="sobre-card">
+      <div class="sobre-card-icon">😌</div>
+      <div class="sobre-card-text">Menos estresse para o animal e para você</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="servicos">
+  <div class="servicos-header">
+    <div class="section-tag">O que oferecemos</div>
+    <h2 class="section-title">Nossos serviços</h2>
+    <p class="section-body">Tudo que seu pet precisa, sem precisar sair de casa.</p>
+  </div>
+  <div class="servicos-grid">
+    <div class="servico-card">
+      <div class="servico-icon">🩺</div>
+      <div class="servico-title">Consultas</div>
+      <div class="servico-desc">Atendimento veterinário completo no conforto da sua casa, com avaliação clínica cuidadosa e atenção dedicada ao seu pet.</div>
+    </div>
+    <div class="servico-card">
+      <div class="servico-icon">🧪</div>
+      <div class="servico-title">Exames completos</div>
+      <div class="servico-desc">Coleta de exames laboratoriais no domicílio para diagnósticos precisos.</div>
+    </div>
+    <div class="servico-card">
+      <div class="servico-icon">💉</div>
+      <div class="servico-title">Vacinação</div>
+      <div class="servico-desc">Protocolo completo de imunização aplicado em casa, com segurança e conforto.</div>
+    </div>
+    <div class="servico-card">
+      <div class="servico-icon">💊</div>
+      <div class="servico-title">Medicações</div>
+      <div class="servico-desc">Aplicação de medicamentos e injeções, com orientação completa sobre o tratamento e cuidados necessários.</div>
+    </div>
+    <div class="servico-card">
+      <div class="servico-icon">📡</div>
+      <div class="servico-title">Microchipagem</div>
+      <div class="servico-desc">Identificação segura e permanente do seu pet, realizada no conforto do lar.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VET -->
+<section style="padding: 60px 0; background: var(--white);">
+  <div class="vet">
+    <div class="vet-photo">👩‍⚕️</div>
+    <div>
+      <div class="vet-crmv">CRMV/SC 15.665</div>
+      <h2 class="vet-name">Dra. Sofia Schroeder</h2>
+      <p class="vet-role">Médica Veterinária</p>
+      <div class="vet-bio">
+        <p>Médica veterinária formada pela Faculdade Anhanguera de São José em 2025, escolheu a Medicina Veterinária com o propósito de cuidar, promover bem-estar e oferecer atendimento de qualidade aos pets e seus tutores.</p>
+        <p>Busca proporcionar uma experiência acolhedora e profissional, realizando atendimentos com atenção aos detalhes e foco no bem-estar do paciente.</p>
+        <p>Está preparada para oferecer um serviço de excelência, levando cuidado, tranquilidade e conforto para os pets no ambiente seguro de seus próprios lares.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ATENDIMENTO -->
+<section class="atendimento">
+  <div>
+    <div class="section-tag">Onde atendemos</div>
+    <h2 class="section-title">Atendimento na Grande Florianópolis</h2>
+    <p class="section-body">Levamos o cuidado veterinário até você em toda a região metropolitana.</p>
+    <ul class="cidades-list">
+      <li>📍 Florianópolis</li>
+      <li>📍 São José</li>
+      <li>📍 Biguaçu</li>
+      <li>📍 Palhoça</li>
+    </ul>
+    <a class="btn-primary" href="https://wa.me/5548988789673" target="_blank">💬 Agendar consulta</a>
+  </div>
+  <div class="map-box">
+    🗺️
+    <div class="map-label">Grande Florianópolis – SC</div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contato">
+  <div class="section-tag">Fale conosco</div>
+  <h2 class="section-title">Entre em contato</h2>
+  <p class="section-body">Somente com hora marcada. Atendemos de segunda a sábado.</p>
+  <div class="contato-grid">
+    <div>
+      <a class="contact-card" href="https://wa.me/5548988789673" target="_blank">
+        <div class="contact-card-icon">📱</div>
+        <div class="contact-card-info">
+          <div class="contact-card-label">WhatsApp</div>
+          <div class="contact-card-value">+55 (48) 98878-9673</div>
+        </div>
+      </a>
+      <a class="contact-card" href="https://instagram.com/dengovet" target="_blank">
+        <div class="contact-card-icon">📸</div>
+        <div class="contact-card-info">
+          <div class="contact-card-label">Instagram</div>
+          <div class="contact-card-value">@dengovet</div>
+        </div>
+      </a>
+    </div>
+    <div class="horario-box">
+      <div class="horario-title">🕐 Horário de atendimento</div>
+      <div class="horario-row"><span>Segunda a Sexta</span><span>Sob agendamento</span></div>
+      <div class="horario-row"><span>Sábado</span><span>Sob agendamento</span></div>
+      <div class="horario-row"><span>Domingo</span><span>Fechado</span></div>
+      <div class="horario-row"><span>Atendimento</span><span>Somente com hora marcada</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>DengoVet</strong> – Veterinária a Domicílio<br>
+  Grande Florianópolis: Florianópolis, São José, Biguaçu e Palhoça – SC<br>
+  CRMV/SC 15.665 · <a href="https://wa.me/5548988789673" style="color:var(--pink-main);">+55 (48) 98878-9673</a>
+</footer>
+
+<!-- WhatsApp FAB -->
+<a class="wa-fab" href="https://wa.me/5548988789673" target="_blank" title="Falar no WhatsApp">📱</a>
+
+</body>
+</html>
