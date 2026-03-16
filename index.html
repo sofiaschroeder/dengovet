@@ -225,15 +225,11 @@
       font-size: .88rem; font-weight: 600;
     }
     .map-box {
-      background: var(--pink-light); border-radius: 28px;
-      aspect-ratio: 4/3; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 12px;
-      font-size: 3.5rem;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,.05);
-      overflow: hidden; position: relative;
-    }
-    .map-label {
-      font-size: .85rem; color: var(--text-soft); font-weight: 500;
+      border-radius: 28px;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      position: relative;
+      min-height: 380px;
     }
 
     /* ── CONTATO ───────────────────────────────────── */
@@ -432,9 +428,17 @@
     </ul>
     <a class="btn-primary" href="https://wa.me/5548988789673?text=Olá%2C+vim+pelo+site+da+DengoVet+e+gostaria+de+mais+informações!" target="_blank">💬 Agendar consulta</a>
   </div>
-  <div class="map-box">
-    🗺️
-    <div class="map-label">Grande Florianópolis – SC</div>
+  <div class="map-box" style="padding:0;overflow:hidden;border-radius:28px;box-shadow:0 16px 48px rgba(224,92,82,.15);">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d220000!2d-48.65!3d-27.65!3m2!1i1024!2i768!4f13.1!4m3!3e6!4m0!4m0!5e0!3m2!1spt-BR!2sbr!4v1710000000000"
+      width="100%"
+      height="420"
+      style="border:0;width:100%;height:420px;display:block;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Área de atendimento DengoVet – Grande Florianópolis">
+    </iframe>
   </div>
 </section>
 
